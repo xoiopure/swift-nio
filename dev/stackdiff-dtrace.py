@@ -87,17 +87,10 @@ def total_count_for_key(d, key):
     return sum(map(lambda x : x[0], value))
 
 def total_for_dictionary(d):
-    total = 0
-    for k in d.keys():
-        total += total_count_for_key(d, k)
-    return total
+    return sum(total_count_for_key(d, k) for k in d.keys())
 
 def extract_useful_keys(d):
-    keys = set()
-    for k in d.keys():
-        if total_count_for_key(d, k) >= 1000:
-            keys.add(k)
-    return keys
+    return {k for k in d.keys() if total_count_for_key(d, k) >= 1000}
 
 def print_dictionary_member(d, key):
     print(total_count_for_key(d, key))
